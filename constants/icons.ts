@@ -4,6 +4,9 @@ import ProfileIcon from "@/assets/icons/Profile.png";
 import ProfileIconActive from "@/assets/icons/Profile-Active.png";
 import ExploreIcon from "@/assets/icons/Search.png";
 import ExploreIconActive from "@/assets/icons/Search-Active.png";
+import NotificationIcon from "@/assets/icons/bell.png";
+
+import FilterIcon from "@/assets/icons/Filter.png";
 
 export default {
   HomeIcon,
@@ -13,4 +16,7 @@ export default {
   HomeIconActive,
   ProfileIconActive,
   ExploreIconActive,
+  NotificationIcon,
+
+  FilterIcon,
 };

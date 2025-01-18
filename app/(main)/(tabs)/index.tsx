@@ -9,26 +9,13 @@ import ProfileImage from "@/assets/icons/Home.svg";
 
 export default function TabOneScreen() {
   return (
-    <SafeAreaView className="h-full flex items-center ">
-      <Text>This is home v3</Text>
-
-      <Text className="mt-10">This is image asd asd</Text>
-      {/* <ProfileImage
-        width={100}
-        height={100}
-        source={ProfileImage}
-        resizeMode="cover"
-      /> */}
-      <Image
-        resizeMode="contain"
-        alt="test image"
-        source={require("@/assets/icons/Search.png")}
-      />
-      {/** 1- header */}
-      {/* <HomeHeader />
-      <SearchBar />
-      <FeaturesSlider />
-      <Recommendations /> */}
+    <SafeAreaView className="h-full w-full bg-white flex flex-col  items-center ">
+      <View className="px-[20px] py-[20px] w-full flex flex-col gap-7 ">
+        <HomeHeader className="" />
+        <SearchBar />
+        <FeaturesSlider />
+        <Recommendations />
+      </View>
     </SafeAreaView>
   );
 }
