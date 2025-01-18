@@ -1,12 +1,13 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import RecommendationsFilters from "../shared/recommendations-filters";
+import { cn } from "@/lib/utils";
 
-const Recommendations = () => {
+const Recommendations = ({ className }: { className?: string }) => {
   return (
-    <View>
+    <View className={cn(className)}>
       <RecommendationsFilters />
-      Recommendations
+      <Text>Recommendations</Text>
     </View>
   );
 };

@@ -10,10 +10,10 @@ import ProfileImage from "@/assets/icons/Home.svg";
 export default function TabOneScreen() {
   return (
     <SafeAreaView className="h-full w-full bg-white flex flex-col  items-center ">
-      <View className="px-[20px] py-[20px] w-full flex flex-col gap-7 ">
+      <View className="px-[20px] py-[20px] w-full flex flex-col gap-7 h-full ">
         <HomeHeader className="" />
         <SearchBar />
-        <FeaturesSlider />
+        <FeaturesSlider className="" />
         <Recommendations />
       </View>
     </SafeAreaView>

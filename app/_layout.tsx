@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "./global.css";
 import { useColorScheme } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -59,11 +60,13 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      {/* <Stack>
+      <GestureHandlerRootView>
+        {/* <Stack>
         <Stack.Screen options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack> */}
-      <Stack screenOptions={{ headerShown: false }} />
+        <Stack screenOptions={{ headerShown: false }} />
+      </GestureHandlerRootView>
     </ThemeProvider>
   );
 }

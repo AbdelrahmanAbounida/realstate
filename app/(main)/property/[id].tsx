@@ -1,8 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const PropertyPage = () => {
-  return <View>Property Page</View>;
+  return (
+    <View>
+      <Text>Property Page</Text>
+    </View>
+  );
 };
 
 export default PropertyPage;

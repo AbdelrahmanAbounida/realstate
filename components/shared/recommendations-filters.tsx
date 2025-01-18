@@ -1,8 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const RecommendationsFilters = () => {
-  return <View>Recommendations Filters</View>;
+  return (
+    <View>
+      <Text>Recommendations Filters</Text>
+    </View>
+  );
 };
 
 export default RecommendationsFilters;
