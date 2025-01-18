@@ -5,8 +5,9 @@ import ProfileIconActive from "@/assets/icons/Profile-Active.png";
 import ExploreIcon from "@/assets/icons/Search.png";
 import ExploreIconActive from "@/assets/icons/Search-Active.png";
 import NotificationIcon from "@/assets/icons/bell.png";
-
 import FilterIcon from "@/assets/icons/Filter.png";
+import StarIcon from "@/assets/icons/Star.png";
+import HeartIcon from "@/assets/icons/Heart.png";
 
 export default {
   HomeIcon,
@@ -19,4 +20,6 @@ export default {
   NotificationIcon,
 
   FilterIcon,
+  StarIcon,
+  HeartIcon,
 };

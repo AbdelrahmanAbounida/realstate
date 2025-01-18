@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
-import ProfileImage from "@/assets/images/image.png";
 import icons from "@/constants/icons";
 import { cn } from "@/lib/utils";
+import images from "@/constants/images";
 
 const HomeHeader = ({ className }: { className?: string }) => {
   return (
@@ -15,7 +15,7 @@ const HomeHeader = ({ className }: { className?: string }) => {
       {/** User Nav */}
       <View className="flex flex-row items-center gap-3">
         <Image
-          source={ProfileImage}
+          source={images.ProfileImage}
           alt="profile-image"
           width={44}
           height={44}

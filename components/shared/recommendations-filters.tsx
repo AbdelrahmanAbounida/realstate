@@ -9,7 +9,7 @@ const RecommendationsFilters = () => {
   const [currentFilter, setcurrentFilter] =
     useState<(typeof filters)[number]>("All");
   return (
-    <View className="flex items-center gap-4">
+    <View className="flex items-center gap-4 mt-5">
       <View className="flex flex-row items-center justify-between w-full">
         <Text className="font-rubik-semibold text-lg">Our Recommendation</Text>
         <TouchableOpacity>
