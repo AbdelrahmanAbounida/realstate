@@ -62,9 +62,9 @@ export default function TabLayout() {
       {MAIN_APP_TABS.map((tab, index) => (
         <Tabs.Screen
           key={index}
-          name={tab.link}
+          name={tab.title}
           options={{
-            title: tab.link,
+            title: tab.title, // check link
             tabBarShowLabel: false,
             // tabBarLabel : "", // anthor way to hide title
             tabBarLabelStyle: { display: "none" },

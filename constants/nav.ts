@@ -5,19 +5,19 @@ export const MAIN_APP_TABS: ScreenTabProps[] = [
   {
     icon: icons.HomeIcon,
     activeIcon: icons.HomeIconActive,
-    title: "Home",
-    link: "index",
+    title: "index", // link
+    link: "/",
   },
   {
     icon: icons.ExploreIcon,
     activeIcon: icons.ExploreIconActive,
-    title: "Explore",
-    link: "explore",
+    title: "explore",
+    link: "/explore",
   },
   {
     icon: icons.ProfileIcon,
     activeIcon: icons.ProfileIconActive,
-    title: "Profile",
-    link: "profile",
+    title: "profile",
+    link: "/profile",
   },
 ];

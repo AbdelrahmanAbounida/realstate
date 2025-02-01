@@ -1,13 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const RegisterPage = () => {
+export const AuthHome = () => {
   return (
     <SafeAreaView>
-      <Text>RegisterPage</Text>
+      <Text>Auth Home</Text>;
     </SafeAreaView>
   );
 };
-
-export default RegisterPage;

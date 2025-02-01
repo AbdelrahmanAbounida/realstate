@@ -1,10 +1,9 @@
-import "react-native-url-polyfill/auto";
+// import "react-native-url-polyfill/auto";
 // import "react-native-get-random-values";
 import * as SecureStore from "expo-secure-store";
 import * as aesjs from "aes-js";
 import { createClient } from "@supabase/supabase-js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import "react-native-get-random-values";
 import { Platform } from "react-native";
 
 // TODO:: replace with watermelon and uninstall async-storage

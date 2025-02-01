@@ -12,6 +12,9 @@ import "react-native-reanimated";
 import "./global.css";
 import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { RootSiblingParent } from "react-native-root-siblings";
+import { AuthProvider } from "@/context/auth-provider";
+import "react-native-url-polyfill/auto";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -59,14 +62,16 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <GestureHandlerRootView>
-        {/* <Stack>
-        <Stack.Screen options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      </Stack> */}
-        <Stack screenOptions={{ headerShown: false }} />
-      </GestureHandlerRootView>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <RootSiblingParent>
+          <GestureHandlerRootView>
+            <Stack screenOptions={{ headerShown: false }} />
+            {/** Handle all screens  */}
+            {/** TODO:: Add modals , ... */}
+          </GestureHandlerRootView>
+        </RootSiblingParent>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
