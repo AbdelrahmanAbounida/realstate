@@ -1,8 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const ExploreApartmentsList = () => {
-  return <View>Explore appartments</View>;
+  return (
+    <View>
+      <Text>Explore appartments</Text>
+    </View>
+  );
 };
 
 export default ExploreApartmentsList;

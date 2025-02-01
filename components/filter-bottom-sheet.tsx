@@ -1,8 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const FilterBottomSheet = () => {
-  return <View>Filters bottom sheet</View>;
+  return (
+    <View>
+      <Text>Filters bottom sheet</Text>
+    </View>
+  );
 };
 
 export default FilterBottomSheet;
