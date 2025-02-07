@@ -10,6 +10,9 @@ import StarIcon from "@/assets/icons/Star.png";
 import HeartIcon from "@/assets/icons/Heart.png";
 import GoogleIcon from "@/assets/icons/Google.png";
 import LogoIcon from "@/assets/icons/logo.png";
+import backArrow from "@/assets/icons/back-arrow.png";
+import heart from "@/assets/icons/Heart.png";
+import send from "@/assets/icons/send.png";
 
 export default {
   HomeIcon,
@@ -27,4 +30,7 @@ export default {
   GoogleIcon,
 
   LogoIcon,
+  backArrow,
+  heart,
+  send,
 };

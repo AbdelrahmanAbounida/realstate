@@ -42,7 +42,10 @@ export default function Login() {
 
   return (
     <SafeAreaView className="bg-dark h-full">
-      <ScrollView className="w-full mt-[60px] px-[24px] ">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        className="w-full mt-[60px] px-[24px] "
+      >
         <Logo />
         <Text className="mt-9 text-[22px] font-psemibold text-primary-400 font-rubik">
           Login
