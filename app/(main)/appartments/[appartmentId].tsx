@@ -73,13 +73,29 @@ export default function AppartmentScreen() {
             {appartment?.title}
           </Text>
 
-          {/** Rage */}
+          {/** 1- Rage */}
 
-          {/** Other Details
+          {/** 2- Other Details
            *
            */}
 
           <Divider className=" " />
+
+          {/** 3- agent View */}
+
+          {/** 4- Overview */}
+
+          {/** 5- Facilities */}
+
+          {/** 6- Galleries */}
+
+          {/** 7- Location */}
+
+          {/** 8- Reviews start */}
+
+          {/** 9- Reviews Comments */}
+
+          {/** 10- Price and Book Noew */}
         </View>
       </ScrollView>
     </View>
