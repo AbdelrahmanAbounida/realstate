@@ -19,7 +19,7 @@ import { normalizePath } from "@/lib/utils";
 
 interface ContextProps {
   currentUser: null | User;
-  session: Session | null; // user info
+  session: Session | null;
   loading: boolean;
   register: (data: RegisterProps) => Promise<void>;
   authError: AuthError | null;
@@ -36,23 +36,17 @@ interface Props {
 const AuthProvider = (props: Props) => {
   const [user, setUser] = useState<null | User>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [isLoading, setIsLoading] = useState(true); // TODO:: add this too and use it for routing handling
-  const [authError, setauthError] = useState<AuthError | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [authError, setAuthError] = useState<AuthError | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
   const path = usePathname();
   const normalizedPath = normalizePath(path);
-
   const router = useRouter();
 
-  // auth error
   const _storeError = (error?: AuthError) => {
-    if (error) {
-      setauthError(error);
-    } else {
-      setauthError(null);
-    }
+    setAuthError(error || null);
   };
 
-  // login
   const handleLogin = async ({ email, password }: LoginProps) => {
     try {
       setIsLoading(true);
@@ -60,17 +54,19 @@ const AuthProvider = (props: Props) => {
         email,
         password,
       });
+
+      if (error) throw error;
+
       setSession(data.session);
       setUser(data.session?.user ?? null);
-      _storeError(error!);
     } catch (error) {
-      setauthError(error as AuthError);
+      setAuthError(error as AuthError);
+      throw error;
     } finally {
       setIsLoading(false);
     }
   };
 
-  // register
   const handleRegister = async ({ name, email, password }: RegisterProps) => {
     try {
       setIsLoading(true);
@@ -84,38 +80,36 @@ const AuthProvider = (props: Props) => {
         },
       });
 
+      if (error) throw error;
+
       setSession(data.session);
       setUser(data.session?.user ?? null);
-      _storeError(error!);
     } catch (error) {
-      setauthError(error as AuthError);
+      setAuthError(error as AuthError);
+      throw error;
     } finally {
       setIsLoading(false);
     }
   };
 
-  // fetch session
   const _fetchSession = useCallback(async () => {
     try {
-      setIsLoading(true);
       const { data, error } = await supabase.auth.getSession();
-      if (error) {
-        console.error("Error fetching session:", error);
-        setIsLoading(false);
-        return;
-      }
+      if (error) throw error;
+
       setSession(data.session);
       setUser(data.session?.user ?? null);
     } catch (error) {
-      setauthError(error as AuthError);
+      console.error("Error fetching session:", error);
+      setAuthError(error as AuthError);
     } finally {
       setIsLoading(false);
+      setIsInitialized(true);
     }
   }, []);
 
-  // routing user
   const _handleRouting = useCallback(() => {
-    if (isLoading) return;
+    if (!isInitialized || isLoading) return;
 
     const isPublicRoute = PUBLIC_ROUTES.some((route) =>
       normalizedPath.startsWith(route.toString())
@@ -125,60 +119,57 @@ const AuthProvider = (props: Props) => {
     );
 
     if (!user) {
-      // Only redirect if we're not already on login page and not on a public route
       if (
         !isPublicRoute &&
         !isAuthRoute &&
-        !(DEFAULT_REDIRECT_TO_LOGIN_ROUTE.toString() == path) // we need here the absolute path
+        path !== DEFAULT_REDIRECT_TO_LOGIN_ROUTE
       ) {
-        router.push(DEFAULT_REDIRECT_TO_LOGIN_ROUTE);
+        router.replace(DEFAULT_REDIRECT_TO_LOGIN_ROUTE);
       }
-    } else {
-      // user loggedin
-      if (isAuthRoute) {
-        router.push(DEFAULT_REDIRECT_TO_HOME_ROUTE);
-      }
+    } else if (isAuthRoute) {
+      router.replace(DEFAULT_REDIRECT_TO_HOME_ROUTE);
     }
-  }, [isLoading, user, path]);
+  }, [isInitialized, isLoading, user, path, normalizedPath]);
 
-  // logout
   const handleLogout = async () => {
     try {
+      setIsLoading(true);
       const { error } = await supabase.auth.signOut();
-      if (error) {
-        setauthError(error);
-      }
+      if (error) throw error;
+
       setSession(null);
       setUser(null);
-      setIsLoading(false);
-      router.push(DEFAULT_REDIRECT_TO_LOGIN_ROUTE);
+      router.replace(DEFAULT_REDIRECT_TO_LOGIN_ROUTE);
     } catch (error) {
-      setauthError(error as AuthError);
+      setAuthError(error as AuthError);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // refetch session , handle routing on path change
-  useFocusEffect(
-    useCallback(() => {
-      _fetchSession();
-      _handleRouting();
-    }, [isLoading, user, path])
-  );
-
-  // update user , session info
+  // Initialize auth state
   useEffect(() => {
-    // listen for auth state changes
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        // console.log(`Supabase auth event: ${event}`); // could be used this event in push /..
-        setSession(session);
-        setUser(session?.user!);
-      }
-    );
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, [user]);
+    _fetchSession();
+  }, []);
+
+  // Handle routing when auth state or path changes
+  // useEffect(() => {
+  //   _handleRouting();
+  // }, [_handleRouting]);
+
+  // Listen for auth state changes
+  // useEffect(() => {
+  //   const { data: authListener } = supabase.auth.onAuthStateChange(
+  //     async (event, session) => {
+  //       setSession(session);
+  //       setUser(session?.user ?? null);
+  //     }
+  //   );
+
+  //   return () => {
+  //     authListener.subscription.unsubscribe();
+  //   };
+  // }, []);
 
   return (
     <AuthContext.Provider

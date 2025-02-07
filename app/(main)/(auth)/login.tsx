@@ -3,93 +3,50 @@ import {
   Text,
   ActivityIndicator,
   ScrollView,
-  Touchable,
   TouchableOpacity,
+  Image,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Link, useRouter } from "expo-router";
-import Toast from "react-native-root-toast";
+import { Link } from "expo-router";
+import Logo from "@/components/logo";
 import { useAuth } from "@/context/auth-provider";
-import { DEFAULT_REDIRECT_TO_LOGIN_ROUTE } from "@/constants/routes";
+import AuthTextInput from "@/components/auth/auth-text-input";
+import { LoginSchema } from "@/schemas/auth-schema";
+import { toast } from "@/lib/toast";
+import icons from "@/constants/icons";
+import SocialAuth from "@/components/auth/social";
 
-const LoginfromSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: "Email is required" })
-    .refine(
-      (data) =>
-        z
-          .string()
-          .min(1, { message: "Email is required" })
-          .email({ message: "Email not valid" })
-          .safeParse(data.trim()).success
-    )
-    .transform((val) => val.replaceAll(" ", "")),
-  // .email({ message: "Email not valid" })
-  password: z.string().min(1, { message: "password is required" }),
-});
-
-export default function LoginPage() {
+export default function Login() {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<z.infer<typeof LoginfromSchema>>({
-    resolver: zodResolver(LoginfromSchema),
+  } = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
   });
+  const { login, authError, loading } = useAuth();
 
-  const router = useRouter();
-
-  const handleLogin = async (data: z.infer<typeof LoginfromSchema>) => {
-    console.log("Login ");
-    console.log({ data });
-    try {
-      setloading(true);
-      setloginError("");
-      const res = await login!({ email: data.email, password: data.password });
-
-      if (res?.error) {
-        let toast = Toast.show(res?.errorlear, {
-          duration: Toast.durations.LONG,
-        });
-        setTimeout(function hideToast() {
-          Toast.hide(toast);
-        }, 3000);
-
-        setloginError(res.error);
-      }
-    } catch (error) {
-      console.log({ error });
-      setloginError("Something went wrong");
-    } finally {
-      setloading(false);
-    }
+  const handleLogin = async (data: z.infer<typeof LoginSchema>) => {
+    if (!login) return;
+    await login(data);
   };
-  const [loginError, setloginError] = useState<string>("");
-  const [loading, setloading] = useState(false);
-  const { login, session } = useAuth();
-  // const accessToken = session?.access_token;
+
+  useEffect(() => {
+    if (!authError) return;
+    toast.error(authError.message);
+  }, [authError]);
 
   return (
     <SafeAreaView className="bg-dark h-full">
       <ScrollView className="w-full mt-[60px] px-[24px] ">
-        <Text>Logo</Text>
-        <Text className="mt-9 text-[22px] font-psemibold text-white">
+        <Logo />
+        <Text className="mt-9 text-[22px] font-psemibold text-primary-400 font-rubik">
           Login
         </Text>
-
-        {/* <Link href={"/(main)/(auth)"}>Main Auth </Link> */}
-        <TouchableOpacity
-          onPress={() => {
-            router.push(DEFAULT_REDIRECT_TO_LOGIN_ROUTE);
-          }}
-        >
-          <Text>ASD</Text>
-        </TouchableOpacity>
         {/** form */}
         <View className="mt-7 space-y-3 flex">
           {/** Email */}
@@ -100,17 +57,19 @@ export default function LoginPage() {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <View>
-                {/* <AuthTextInput
+                <AuthTextInput
                   title="Email"
                   onBlur={onBlur}
                   onChange={onChange}
                   value={value}
                   placeholder="Your Email"
                   error={!!errors.email}
-                /> */}
+                />
                 {errors.email && (
                   <View className="absolute top-[17px] right-1">
-                    {/* <ErrorMessage message={errors.email.message!} /> */}
+                    <Text className="text-red-500  text-[11px]">
+                      {errors.email.message}
+                    </Text>
                   </View>
                 )}
               </View>
@@ -126,7 +85,7 @@ export default function LoginPage() {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <View>
-                {/* <AuthTextInput
+                <AuthTextInput
                   title="Password"
                   onBlur={onBlur}
                   onChange={onChange}
@@ -134,10 +93,12 @@ export default function LoginPage() {
                   placeholder="*****"
                   fieldType="password"
                   error={!!errors.password}
-                /> */}
+                />
                 {errors.password && (
                   <View className="absolute top-[17px]  right-1">
-                    {/* <ErrorMessage message={errors.password.message!} /> */}
+                    <Text className="text-red-500  text-[11px]">
+                      {errors.password.message}
+                    </Text>
                   </View>
                 )}
               </View>
@@ -146,8 +107,8 @@ export default function LoginPage() {
           />
 
           <View className="w-full  flex flex-row items-center justify-end px-2">
-            <Link href={"/(main)/(auth)/forget-password"}>
-              <Text className="text-secondary">Forget Password?</Text>
+            <Link href={"/forget-password"} className="mt-2 text-primary-300 ">
+              <Text className="text-secondary ">Forget Password?</Text>
             </Link>
           </View>
 
@@ -155,24 +116,23 @@ export default function LoginPage() {
           {loading ? (
             <ActivityIndicator size="small" color="#fff" />
           ) : (
-            <></>
-            // <CustomButton
-            //   variant={"default"}
-            //   className="w-full text-white "
-            //   textClassName="text-lg font-semibold"
-            //   style={{ marginTop: 10 }}
-            //   title="Log In"
-            //   onClick={handleSubmit(handleLogin)}
-            // />
+            <TouchableOpacity
+              className="rounded-xl text-center flex flex-row justify-center  bg-primary-300 p-4 mt-4"
+              onPress={handleSubmit(handleLogin)}
+            >
+              <Text className="text-[19px] font-rubik text-white ">Login</Text>
+            </TouchableOpacity>
           )}
         </View>
 
+        <SocialAuth />
+
         {/** go to register */}
-        <View className="flex flex-row items-center justify-center text-center mt-3">
+        <View className="flex flex-row items-center justify-center text-center mt-4">
           <Text className="text-secondary font-pregular">
-            Don’t have an account?{"  "}
-            <Link href={"/(main)/(auth)/register"}>
-              <Text className="text-primary">Signup</Text>
+            {"Don’t have an account? "}
+            <Link href={"/register"} className="">
+              <Text className="text-primary-300">Signup</Text>
             </Link>
           </Text>
         </View>

@@ -9,6 +9,7 @@ import FilterIcon from "@/assets/icons/Filter.png";
 import StarIcon from "@/assets/icons/Star.png";
 import HeartIcon from "@/assets/icons/Heart.png";
 import GoogleIcon from "@/assets/icons/Google.png";
+import LogoIcon from "@/assets/icons/logo.png";
 
 export default {
   HomeIcon,
@@ -24,4 +25,6 @@ export default {
   StarIcon,
   HeartIcon,
   GoogleIcon,
+
+  LogoIcon,
 };

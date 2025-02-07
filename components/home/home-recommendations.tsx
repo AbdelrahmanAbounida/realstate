@@ -12,8 +12,10 @@ import images from "@/constants/images";
 import { Heart, Star } from "lucide-react-native";
 import { FlatList } from "react-native-gesture-handler";
 import icons from "@/constants/icons";
+import { useRouter } from "expo-router";
 
 interface RecommendationItemProps {
+  id: number;
   title: string;
   value: number;
   place: string;
@@ -22,6 +24,7 @@ interface RecommendationItemProps {
 }
 const recommendationsItems: RecommendationItemProps[] = [
   {
+    id: 1,
     title: "La Grand Masion",
     place: "Tokyo, Japan",
     value: 122219,
@@ -29,6 +32,7 @@ const recommendationsItems: RecommendationItemProps[] = [
     rate: 4.7,
   },
   {
+    id: 2,
     title: "La Grand Masion",
     place: "Us, NewYork",
     value: 789132,
@@ -36,6 +40,7 @@ const recommendationsItems: RecommendationItemProps[] = [
     rate: 4.8,
   },
   {
+    id: 3,
     title: "La Grand Masion",
     place: "Egypt Cairo",
     value: 353412,
@@ -43,6 +48,7 @@ const recommendationsItems: RecommendationItemProps[] = [
     rate: 4.9,
   },
   {
+    id: 4,
     title: "La Grand Masion",
     place: "Tokyo, Japan",
     value: 1242134,
@@ -52,6 +58,7 @@ const recommendationsItems: RecommendationItemProps[] = [
 ];
 
 const Recommendations = ({ className }: { className?: string }) => {
+  const router = useRouter();
   return (
     <View className={cn("flex flex-col gap-5 mt-2", className)}>
       <RecommendationsFilters />
@@ -59,6 +66,12 @@ const Recommendations = ({ className }: { className?: string }) => {
       <View className="w-full flex-row flex-wrap gap-4  mb-32">
         {recommendationsItems.map((item, index) => (
           <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: "/(main)/appartments/[appartmentId]",
+                params: { appartmentId: item.id },
+              })
+            }
             key={index}
             className="bg-white border border-black-100/20 p-3 rounded-lg gap-3  w-[170px]"
           >

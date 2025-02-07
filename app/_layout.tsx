@@ -16,6 +16,7 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { AuthProvider } from "@/context/auth-provider";
 import "react-native-url-polyfill/auto";
 import { StatusBar } from "expo-status-bar";
+import { ToastProvider } from "react-native-toast-notifications";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -64,16 +65,20 @@ function RootLayoutNav() {
 
   return (
     <AuthProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <RootSiblingParent>
-          <GestureHandlerRootView>
-            <StatusBar />
-            <Stack screenOptions={{ headerShown: false }} />
-            {/** Handle all screens  */}
-            {/** TODO:: Add modals , ... */}
-          </GestureHandlerRootView>
-        </RootSiblingParent>
-      </ThemeProvider>
+      <ToastProvider>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <RootSiblingParent>
+            <GestureHandlerRootView>
+              <StatusBar />
+              <Stack screenOptions={{ headerShown: false }} />
+              {/** Handle all screens  */}
+              {/** TODO:: Add modals , ... */}
+            </GestureHandlerRootView>
+          </RootSiblingParent>
+        </ThemeProvider>
+      </ToastProvider>
     </AuthProvider>
   );
 }
