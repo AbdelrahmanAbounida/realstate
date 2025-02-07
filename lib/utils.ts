@@ -8,3 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 export const absolutePath = (path: string) => {
   return `${process.env.NEXT_PUBLIC_APP_URL}/${path}`;
 };
+
+export const normalizePath = (path: string): string => {
+  // Remove /(main)/(auth) or similar prefixes
+  return path.replace(/\/\(.*?\)/g, "");
+};

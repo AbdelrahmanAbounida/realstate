@@ -1,12 +1,20 @@
-import { View, Text, ActivityIndicator, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  ScrollView,
+  Touchable,
+  TouchableOpacity,
+} from "react-native";
 import React, { useContext, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import Toast from "react-native-root-toast";
 import { useAuth } from "@/context/auth-provider";
+import { DEFAULT_REDIRECT_TO_LOGIN_ROUTE } from "@/constants/routes";
 
 const LoginfromSchema = z.object({
   email: z
@@ -33,6 +41,8 @@ export default function LoginPage() {
   } = useForm<z.infer<typeof LoginfromSchema>>({
     resolver: zodResolver(LoginfromSchema),
   });
+
+  const router = useRouter();
 
   const handleLogin = async (data: z.infer<typeof LoginfromSchema>) => {
     console.log("Login ");
@@ -71,6 +81,15 @@ export default function LoginPage() {
         <Text className="mt-9 text-[22px] font-psemibold text-white">
           Login
         </Text>
+
+        {/* <Link href={"/(main)/(auth)"}>Main Auth </Link> */}
+        <TouchableOpacity
+          onPress={() => {
+            router.push(DEFAULT_REDIRECT_TO_LOGIN_ROUTE);
+          }}
+        >
+          <Text>ASD</Text>
+        </TouchableOpacity>
         {/** form */}
         <View className="mt-7 space-y-3 flex">
           {/** Email */}

@@ -16,7 +16,6 @@ const HomeHeader = ({ className }: { className?: string }) => {
       <View className="flex flex-row items-center gap-3">
         <Image
           source={images.ProfileImage}
-          alt="profile-image"
           width={44}
           height={44}
           resizeMode="cover"
@@ -34,10 +33,9 @@ const HomeHeader = ({ className }: { className?: string }) => {
         <Image
           className="size-7"
           source={icons.NotificationIcon}
-          alt="notiofication"
           width={17}
           height={16}
-        />{" "}
+        />
         {/** TODO:: add blue fill in case of notifications */}
         <View className="absolute top-[1px] -right-[1px] bg-primary-300 h-[8px] w-[8px] rounded-full" />
       </View>

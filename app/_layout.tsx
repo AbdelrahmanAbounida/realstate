@@ -15,6 +15,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { AuthProvider } from "@/context/auth-provider";
 import "react-native-url-polyfill/auto";
+import { StatusBar } from "expo-status-bar";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -66,6 +67,7 @@ function RootLayoutNav() {
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <RootSiblingParent>
           <GestureHandlerRootView>
+            <StatusBar />
             <Stack screenOptions={{ headerShown: false }} />
             {/** Handle all screens  */}
             {/** TODO:: Add modals , ... */}

@@ -3,6 +3,7 @@ import TokyoRecomm1 from "@/assets/images/tokyo-recom.png";
 import TokyoRecomm2 from "@/assets/images/tokyo-recom2.png";
 import TokyoRecomm3 from "@/assets/images/tokyo-recom3.png";
 import TokyoRecomm4 from "@/assets/images/tokyo-recom4.png";
+import AuthHomeImage from "@/assets/images/onboarding.png";
 
 export default {
   ProfileImage,
@@ -10,4 +11,5 @@ export default {
   TokyoRecomm2,
   TokyoRecomm3,
   TokyoRecomm4,
+  AuthHomeImage,
 };
