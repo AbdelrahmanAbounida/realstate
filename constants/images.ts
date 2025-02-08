@@ -11,6 +11,7 @@ import Gallery2 from "@/assets/images/gallery-image2.png";
 import Gallery3 from "@/assets/images/gallery-image3.png";
 
 import Map from "@/assets/images/map.png";
+import Person1 from "@/assets/images/person1.png";
 
 export default {
   ProfileImage,
@@ -25,4 +26,5 @@ export default {
   Gallery2,
   Gallery3,
   Map,
+  Person1,
 };

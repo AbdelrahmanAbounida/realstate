@@ -69,6 +69,17 @@ export default function AppartmentScreen() {
     images.Gallery3,
   ];
 
+  const REVIEWS = [
+    {
+      personName: "Charolette Hanlin",
+      personImage: images.Person1,
+      comment:
+        "The apartment is very clean and modern. I really like the interior design. Looks like I'll feel at home 😍",
+      loveCount: 938,
+      date: "6 days ago",
+    },
+  ];
+
   return (
     <View className="flex-1 flex w-full bg-white h-full flex-col">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -215,8 +226,30 @@ export default function AppartmentScreen() {
             </View>
 
             {/** 8- Reviews start */}
+            <View className="flex flex-row items-center justify-between">
+              <View className="flex-row items-center gap-3">
+                <Image
+                  source={icons.StarIcon}
+                  className="size-4"
+                  width={24}
+                  height={24}
+                />
+                <Text className="text-black-300 text-[20px] font-rubik-semibold">
+                  {appartment?.rate} {"(1,275 reviews)"}
+                </Text>
+              </View>
+
+              <TouchableOpacity>
+                <Text className="text-primary-300 font-semibold text-[16px]">
+                  See All
+                </Text>
+              </TouchableOpacity>
+            </View>
 
             {/** 9- Reviews Comments */}
+            {REVIEWS.map((review, index) => (
+              <ReviewComment key={index} {...review} />
+            ))}
 
             {/** 10- Price and Book Now */}
           </View>
@@ -329,5 +362,46 @@ const ImageGalleryWithOverflow = ({
         </View>
       )}
     </ScrollView>
+  );
+};
+
+const ReviewComment = ({
+  personImage,
+  personName,
+  comment,
+  date,
+  loveCount,
+}: {
+  personImage: ImageSourcePropType;
+  personName: string;
+  comment: string;
+  date: string;
+  loveCount: number;
+}) => {
+  return (
+    <View className="flex gap-4 mb-[20px]">
+      <View className="flex-row gap-2 items-center">
+        <Image
+          source={personImage}
+          className="rounded-full"
+          resizeMode="cover"
+        />
+        <Text className="font-rubik-semibold text-[16px] text-black-300">
+          {personName}
+        </Text>
+      </View>
+
+      <Text className="font-rubik text-[16px] leading-[28px] text-black-200">
+        {comment}
+      </Text>
+
+      <View className="flex flex-row items-center justify-between">
+        <View className="flex-row gap-2">
+          <Image source={icons.HeartIcon} className="text-primary-300" />
+          <Text className="font-rubik-medium text-[14px]">{loveCount}</Text>
+        </View>
+        <Text className="text-black-100 text-[14px] font-rubik">{date}</Text>
+      </View>
+    </View>
   );
 };
