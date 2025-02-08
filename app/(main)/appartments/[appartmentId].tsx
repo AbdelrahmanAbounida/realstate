@@ -250,8 +250,23 @@ export default function AppartmentScreen() {
             {REVIEWS.map((review, index) => (
               <ReviewComment key={index} {...review} />
             ))}
+          </View>
+        </View>
+        {/** 10- Price and Book Now */}
+        <View className="w-full bg-white shadow-sm border border-primary-200 p-[24px] pb-[30px] rounded-t-[36px]">
+          <View className="flex flex-row items-center justify-between w-full">
+            <View className="flex gap-1 flex-1 justify-center">
+              <Text className="text-black-200 uppercase text-[12px] font-rubik-medium leading-[14px] tracking-widest">
+                Price
+              </Text>
+              <Text className="text-primary-300 font-rubik-semibold text-[24px]">
+                $ {appartment?.value}
+              </Text>
+            </View>
 
-            {/** 10- Price and Book Now */}
+            <TouchableOpacity className="bg-primary-300 flex-row items-center justify-center py-[14px] px-[16px] rounded-[100px] flex-1">
+              <Text className="capitalize text-white">Booking Now</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
