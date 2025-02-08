@@ -29,6 +29,7 @@ import wifi from "@/assets/icons/wifi.png";
 import dog from "@/assets/icons/dog.png";
 import sports from "@/assets/icons/sports.png";
 import laundry from "@/assets/icons/laundry.png";
+import gps from "@/assets/icons/gps.png";
 
 export default {
   HomeIcon,
@@ -65,4 +66,5 @@ export default {
   dog,
   sports,
   laundry,
+  gps,
 };

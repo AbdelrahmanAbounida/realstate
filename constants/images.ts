@@ -10,6 +10,8 @@ import Gallery1 from "@/assets/images/gallery-Image1.png";
 import Gallery2 from "@/assets/images/gallery-image2.png";
 import Gallery3 from "@/assets/images/gallery-image3.png";
 
+import Map from "@/assets/images/map.png";
+
 export default {
   ProfileImage,
   TokyoRecomm1,
@@ -22,4 +24,5 @@ export default {
   Gallery1,
   Gallery2,
   Gallery3,
+  Map,
 };

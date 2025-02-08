@@ -199,6 +199,20 @@ export default function AppartmentScreen() {
             }
 
             {/** 7- Location */}
+            <View className="flex gap-4">
+              <SubTitle title="Location" />
+              <View className="flex-row items-center gap-3">
+                <Image source={icons.gps} />
+                <Text className="text-[14px] font-rubik-medium text-black-100">
+                  {appartment?.place}
+                </Text>
+              </View>
+              <Image
+                source={images.Map}
+                resizeMode="cover"
+                className="w-full rounded-xl"
+              />
+            </View>
 
             {/** 8- Reviews start */}
 
