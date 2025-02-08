@@ -3,6 +3,9 @@ import React from "react";
 import { Image, TextInput, View } from "react-native";
 
 const SearchBar = () => {
+  {
+    /** TODO:: add search query here */
+  }
   return (
     <View className="  w-full flex items-center gap-2 flex-row justify-between bg-accent-100  rounded-lg p-3">
       <View className="flex flex-1  flex-row gap-2 items-center h-full w-full">

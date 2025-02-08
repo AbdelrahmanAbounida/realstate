@@ -1,8 +1,8 @@
-import { Divider } from "@/app/ui/divider";
+import { Divider } from "@/components/ui/divider";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { recommendationsItems } from "@/constants/items";
-import { Link, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   Dimensions,
   Platform,
   TouchableOpacity,
+  ImageSourcePropType,
 } from "react-native";
 
 export default function AppartmentScreen() {
@@ -67,19 +68,37 @@ export default function AppartmentScreen() {
           </View>
         </View>
 
-        {/** Page Content */}
-        <View className="p-4">
+        {/** Page Content >> TODO:: To be loaded from db */}
+        <View className="p-4 flex gap-4">
           <Text className=" font-rubik-semibold text-[24px]">
             {appartment?.title}
           </Text>
 
-          {/** 1- Rage */}
+          {/** 1- Rate */}
+          <View className="flex flex-row items-center gap-2 ">
+            <View className=" bg-primary-100 p-1 px-3 rounded-xl">
+              <Text className="uppercase text-primary-300 text-[10px] font-rubik-medium">
+                Apartment
+              </Text>
+            </View>
 
-          {/** 2- Other Details
-           *
-           */}
+            <View className="flex flex-row items-center gap-2">
+              <Image source={icons.StarIcon} resizeMode="contain" />
+              <Text className="text-black-200 font-rubik-medium">4.8</Text>
+              <Text className="text-black-200 font-rubik-medium">
+                (1,275 reviews)
+              </Text>
+            </View>
+          </View>
 
-          <Divider className=" " />
+          {/** 2- Other Details */}
+          <View className="flex items-center flex-row justify-start gap-4">
+            <AppartmentDetails title="8 Beds" icon={icons.bed} />
+            <AppartmentDetails title="3 Bath" icon={icons.bath} />
+            <AppartmentDetails title="2000 sqft" icon={icons.area} />
+          </View>
+
+          <Divider className="my-3 " />
 
           {/** 3- agent View */}
 
@@ -95,9 +114,29 @@ export default function AppartmentScreen() {
 
           {/** 9- Reviews Comments */}
 
-          {/** 10- Price and Book Noew */}
+          {/** 10- Price and Book Now */}
         </View>
       </ScrollView>
     </View>
   );
 }
+
+const AppartmentDetails = ({
+  title,
+  icon,
+}: {
+  title: string;
+  icon: ImageSourcePropType;
+}) => {
+  return (
+    <View className="flex flex-row items-center gap-2">
+      <View className="bg-primary-100 p-3 rounded-full">
+        <Image source={icon} className="" />
+      </View>
+
+      <Text className="text-black-300 text-[14px] font-rubik-medium">
+        {title}
+      </Text>
+    </View>
+  );
+};

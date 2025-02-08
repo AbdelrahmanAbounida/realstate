@@ -14,6 +14,10 @@ import backArrow from "@/assets/icons/back-arrow.png";
 import heart from "@/assets/icons/Heart.png";
 import send from "@/assets/icons/send.png";
 
+import area from "@/assets/icons/area.png";
+import bath from "@/assets/icons/bath.png";
+import bed from "@/assets/icons/bed.png";
+
 export default {
   HomeIcon,
   ProfileIcon,
@@ -33,4 +37,8 @@ export default {
   backArrow,
   heart,
   send,
+
+  area,
+  bath,
+  bed,
 };
