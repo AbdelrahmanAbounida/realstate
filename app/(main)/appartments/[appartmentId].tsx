@@ -61,6 +61,14 @@ export default function AppartmentScreen() {
     },
   ];
 
+  const GALLERIES = [
+    images.Gallery1,
+    images.Gallery2,
+    images.Gallery3,
+    images.Gallery3,
+    images.Gallery3,
+  ];
+
   return (
     <View className="flex-1 flex w-full bg-white h-full flex-col">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -163,7 +171,6 @@ export default function AppartmentScreen() {
             </View>
 
             {/** 4- Overview */}
-
             <View className="flex gap-2">
               <SubTitle title="Overview" />
               <Text className="font-rubik leading-[28px] text-[16px] text-black-200">
@@ -176,7 +183,7 @@ export default function AppartmentScreen() {
             {/** 5- Facilities */}
             <View className="flex gap-3">
               <SubTitle title="Facilities" />
-              <View className="flex flex-row flex-wrap gap-4 pb-[200px] w-full ">
+              <View className="flex flex-row flex-wrap gap-4  w-full ">
                 {FACILITIES.map((facility, index) => (
                   <Facility key={index} {...facility} />
                 ))}
@@ -184,6 +191,12 @@ export default function AppartmentScreen() {
             </View>
 
             {/** 6- Galleries */}
+            {
+              <View className="flex gap-3">
+                <SubTitle title="Gallery" />
+                <ImageGalleryWithOverflow images={GALLERIES} maxVisible={3} />
+              </View>
+            }
 
             {/** 7- Location */}
 
@@ -252,5 +265,55 @@ const Facility = ({
         {title}
       </Text>
     </View>
+  );
+};
+
+const ImageGalleryWithOverflow = ({
+  images,
+  maxVisible = 4,
+}: {
+  images: ImageSourcePropType[];
+  maxVisible?: number;
+}) => {
+  if (!images || images.length === 0) return null;
+
+  const overflowCount = images.length - maxVisible;
+  const visibleImages = images.slice(0, maxVisible);
+  const showOverflow = overflowCount > 0;
+  const imagesToShow = showOverflow
+    ? visibleImages.slice(0, maxVisible - 1)
+    : visibleImages;
+
+  return (
+    <ScrollView
+      showsHorizontalScrollIndicator={false}
+      horizontal
+      contentContainerClassName="flex-row gap-3 flex-2  items-center "
+      className="mb-3"
+    >
+      {imagesToShow.map((image, index) => (
+        <Image
+          key={index}
+          source={image}
+          className=" rounded-lg"
+          resizeMode="cover"
+        />
+      ))}
+
+      {showOverflow && (
+        <View className="relative ">
+          <Image
+            source={images[maxVisible - 1]}
+            className="rounded-lg"
+            resizeMode="cover"
+          />
+          <View className="absolute inset-0 bg-black-300/60 rounded-lg items-center justify-center">
+            <Text className="text-white text-xl font-bold">
+              +{overflowCount}
+            </Text>
+          </View>
+        </View>
+      )}
+    </ScrollView>
   );
 };

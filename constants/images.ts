@@ -6,6 +6,10 @@ import TokyoRecomm4 from "@/assets/images/tokyo-recom4.png";
 import AuthHomeImage from "@/assets/images/onboarding.png";
 import whiteGradient from "@/assets/images/white-gradient.png";
 
+import Gallery1 from "@/assets/images/gallery-Image1.png";
+import Gallery2 from "@/assets/images/gallery-image2.png";
+import Gallery3 from "@/assets/images/gallery-image3.png";
+
 export default {
   ProfileImage,
   TokyoRecomm1,
@@ -14,4 +18,8 @@ export default {
   TokyoRecomm4,
   AuthHomeImage,
   whiteGradient,
+
+  Gallery1,
+  Gallery2,
+  Gallery3,
 };
