@@ -8,7 +8,10 @@ import { Image, ScrollView } from "react-native";
 export default function TabOneScreen() {
   return (
     <SafeAreaView className="h-full w-full bg-[#FDFDFD] flex flex-col  items-center ">
-      <ScrollView className="px-[20px] py-[20px] flex flex-col gap-7 h-full ">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        className="px-[10px] py-[20px] flex flex-col gap-7 h-full "
+      >
         <HomeHeader className="my-3" />
         <SearchBar />
         <FeaturesSlider className="mt-4" />

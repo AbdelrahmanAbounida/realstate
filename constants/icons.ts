@@ -18,6 +18,18 @@ import area from "@/assets/icons/area.png";
 import bath from "@/assets/icons/bath.png";
 import bed from "@/assets/icons/bed.png";
 
+import chat from "@/assets/icons/Chat.png";
+import call from "@/assets/icons/call.png";
+
+import car from "@/assets/icons/car.png";
+import swim from "@/assets/icons/swim.png";
+import gym from "@/assets/icons/gym.png";
+import restaurant from "@/assets/icons/restaurant.png";
+import wifi from "@/assets/icons/wifi.png";
+import dog from "@/assets/icons/dog.png";
+import sports from "@/assets/icons/sports.png";
+import laundry from "@/assets/icons/laundry.png";
+
 export default {
   HomeIcon,
   ProfileIcon,
@@ -41,4 +53,16 @@ export default {
   area,
   bath,
   bed,
+
+  chat,
+  call,
+
+  car,
+  swim,
+  gym,
+  restaurant,
+  wifi,
+  dog,
+  sports,
+  laundry,
 };

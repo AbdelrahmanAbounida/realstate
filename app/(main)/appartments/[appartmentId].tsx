@@ -2,6 +2,7 @@ import { Divider } from "@/components/ui/divider";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { recommendationsItems } from "@/constants/items";
+import { cn } from "@/lib/utils";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
   View,
@@ -24,12 +25,45 @@ export default function AppartmentScreen() {
   const windowHeight = Dimensions.get("window").height;
   const router = useRouter();
 
+  // TODO:: to be loaded from db
+  const FACILITIES = [
+    {
+      title: "Car Parking",
+      icon: icons.car,
+    },
+    {
+      title: "Swimming",
+      icon: icons.swim,
+    },
+    {
+      title: "Gym & Fitness",
+      icon: icons.gym,
+    },
+    {
+      title: "Restaurant",
+      icon: icons.restaurant,
+    },
+    {
+      title: "Wi-fi & Network",
+      icon: icons.wifi,
+    },
+    {
+      title: "Pet Center",
+      icon: icons.dog,
+    },
+    {
+      title: "Sport Center",
+      icon: icons.sports,
+    },
+    {
+      title: "Laundry",
+      icon: icons.laundry,
+    },
+  ];
+
   return (
-    <View className="flex-1 flex w-full h-full flex-col">
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerClassName="bg-white flex-1 "
-      >
+    <View className="flex-1 flex w-full bg-white h-full flex-col">
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/** Image */}
         <View className="relative w-full" style={{ height: windowHeight / 2 }}>
           <Image
@@ -69,7 +103,7 @@ export default function AppartmentScreen() {
         </View>
 
         {/** Page Content >> TODO:: To be loaded from db */}
-        <View className="p-4 flex gap-4">
+        <View className="p-4 flex gap-4 ">
           <Text className=" font-rubik-semibold text-[24px]">
             {appartment?.title}
           </Text>
@@ -93,35 +127,79 @@ export default function AppartmentScreen() {
 
           {/** 2- Other Details */}
           <View className="flex items-center flex-row justify-start gap-4">
-            <AppartmentDetails title="8 Beds" icon={icons.bed} />
-            <AppartmentDetails title="3 Bath" icon={icons.bath} />
-            <AppartmentDetails title="2000 sqft" icon={icons.area} />
+            <AppartmentDetail title="8 Beds" icon={icons.bed} />
+            <AppartmentDetail title="3 Bath" icon={icons.bath} />
+            <AppartmentDetail title="2000 sqft" icon={icons.area} />
           </View>
 
           <Divider className="my-3 " />
 
           {/** 3- agent View */}
+          <View className="flex gap-9 ">
+            {/**  Contact */}
+            <View className="flex gap-4 mt-1">
+              <SubTitle title="Agent" />
+              <View className="flex flex-row justify-between">
+                <View className="flex items-center flex-row gap-4">
+                  <Image
+                    source={images.ProfileImage}
+                    className="rounded-full"
+                  />
+                  <View className="flex flex-col gap-1">
+                    <Text className="text-[18px] font-rubik-semibold">
+                      Natasya Wilodra
+                    </Text>
+                    <Text className="text-[14px] text-black-100 font-rubik-medium">
+                      Owner
+                    </Text>
+                  </View>
+                </View>
 
-          {/** 4- Overview */}
+                <View className="flex flex-row items-center gap-7 pr-2">
+                  <Image source={icons.chat} />
+                  <Image source={icons.call} />
+                </View>
+              </View>
+            </View>
 
-          {/** 5- Facilities */}
+            {/** 4- Overview */}
 
-          {/** 6- Galleries */}
+            <View className="flex gap-2">
+              <SubTitle title="Overview" />
+              <Text className="font-rubik leading-[28px] text-[16px] text-black-200">
+                Sleek, modern 2-bedroom apartment with open living space,
+                high-end finishes, and city views. Minutes from downtown,
+                dining, and transit.
+              </Text>
+            </View>
 
-          {/** 7- Location */}
+            {/** 5- Facilities */}
+            <View className="flex gap-3">
+              <SubTitle title="Facilities" />
+              <View className="flex flex-row flex-wrap gap-4 pb-[200px] w-full ">
+                {FACILITIES.map((facility, index) => (
+                  <Facility key={index} {...facility} />
+                ))}
+              </View>
+            </View>
 
-          {/** 8- Reviews start */}
+            {/** 6- Galleries */}
 
-          {/** 9- Reviews Comments */}
+            {/** 7- Location */}
 
-          {/** 10- Price and Book Now */}
+            {/** 8- Reviews start */}
+
+            {/** 9- Reviews Comments */}
+
+            {/** 10- Price and Book Now */}
+          </View>
         </View>
       </ScrollView>
     </View>
   );
 }
 
-const AppartmentDetails = ({
+const AppartmentDetail = ({
   title,
   icon,
 }: {
@@ -135,6 +213,42 @@ const AppartmentDetails = ({
       </View>
 
       <Text className="text-black-300 text-[14px] font-rubik-medium">
+        {title}
+      </Text>
+    </View>
+  );
+};
+
+const SubTitle = ({ title }: { title: string }) => (
+  <Text className="text-[20px] font-rubik-semibold capitalize">{title}</Text>
+);
+
+const Facility = ({
+  title,
+  icon,
+}: {
+  title: string;
+  icon: ImageSourcePropType;
+}) => {
+  const screenWidth = Dimensions.get("window").width;
+
+  return (
+    <View
+      className={cn(
+        "flex gap-2 items-center justify-center w-[100px] mb-3",
+        screenWidth >= 400 && "w-[80px]"
+      )}
+    >
+      {/* Icon Container */}
+      <View className="w-[60px] h-[60px] bg-primary-100 rounded-full flex-row items-center justify-center p-3">
+        <Image source={icon} resizeMode="contain" />
+      </View>
+
+      <Text
+        className="font-rubik text-[14px] leading-[20px] text-center truncate"
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
         {title}
       </Text>
     </View>

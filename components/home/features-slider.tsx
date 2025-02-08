@@ -17,6 +17,9 @@ import Animated, {
 import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";
 
 import NewYorkImage from "@/assets/images/new-york.png";
+import { FeaturedCard } from "../shared/card";
+import { useRouter } from "expo-router";
+import { recommendationsItems } from "@/constants/items";
 
 const data = [
   {
@@ -32,23 +35,23 @@ const data = [
     img: "",
   },
 ];
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-    img: NewYorkImage,
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-    img: NewYorkImage,
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-    img: NewYorkImage,
-  },
-];
+// const DATA = [
+//   {
+//     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+//     title: "First Item",
+//     img: NewYorkImage,
+//   },
+//   {
+//     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+//     title: "Second Item",
+//     img: NewYorkImage,
+//   },
+//   {
+//     id: "58694a0f-3da1-471f-bd96-145571e29d72",
+//     title: "Third Item",
+//     img: NewYorkImage,
+//   },
+// ];
 
 type ItemProps = { title: string; img: ImageSourcePropType };
 
@@ -66,6 +69,8 @@ const Item = ({ title, img }: ItemProps) => (
 const FeaturesSlider = ({ className }: { className?: string }) => {
   const carouselRef = useRef<any>();
 
+  const router = useRouter();
+
   return (
     <View className={cn(" w-full  ", className)}>
       <View className="flex flex-row items-center justify-between w-full">
@@ -79,7 +84,7 @@ const FeaturesSlider = ({ className }: { className?: string }) => {
 
       {/*** Images slider */}
       <View className="  mt-3 ">
-        <Animated.FlatList
+        {/* <Animated.FlatList
           data={DATA}
           // numColumns={2}
           renderItem={({ item }) => <Item img={item.img} title={item.title} />}
@@ -96,6 +101,20 @@ const FeaturesSlider = ({ className }: { className?: string }) => {
           pagingEnabled
           // ListEmptyComponent={<Text>asd</Text>}
           // ListHeaderComponent={<Text>asd</Text>}
+        /> */}
+
+        <Animated.FlatList
+          data={recommendationsItems}
+          renderItem={({ item }) => (
+            <FeaturedCard
+              item={item}
+              onPress={() => router.push(`/appartments/${item.id}`)}
+            />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerClassName="flex gap-5 mt-5"
         />
       </View>
     </View>

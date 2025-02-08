@@ -1,7 +1,7 @@
 import images from "@/constants/images";
 import { ImageSourcePropType } from "react-native";
 
-interface RecommendationItemProps {
+export interface RecommendationItemProps {
   id: number;
   title: string;
   value: number;
