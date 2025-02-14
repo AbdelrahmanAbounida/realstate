@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@gorhom/bottom-sheet": "^5.1.1",
     "@hookform/resolvers": "^3.10.0",
+    "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-navigation/native": "^7.0.14",
     "@supabase/supabase-js": "^2.48.1",
@@ -37,6 +39,7 @@
     "react-dom": "18.3.1",
     "react-hook-form": "^7.54.2",
     "react-native": "0.76.6",
+    "react-native-actions-sheet": "^0.9.7",
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-reanimated": "~3.16.1",

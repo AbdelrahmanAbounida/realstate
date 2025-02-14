@@ -2,6 +2,7 @@ import icons from "@/constants/icons";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Image, Platform, TextInput, View } from "react-native";
+import { FilterBottomSheet } from "../filter-bottom-sheet";
 
 const SearchBar = () => {
   {
@@ -26,13 +27,15 @@ const SearchBar = () => {
         <TextInput className="focus:border-0 focus:outline-none ring-0  w-full h-full placeholder:text-gray-600 placeholder:text-sm text-md" />
       </View>
 
-      <Image
-        source={icons.FilterIcon}
-        width={20}
-        height={20}
-        resizeMode="cover"
-        className="size-5"
-      />
+      <FilterBottomSheet>
+        <Image
+          source={icons.FilterIcon}
+          width={20}
+          height={20}
+          resizeMode="cover"
+          className="size-5"
+        />
+      </FilterBottomSheet>
     </View>
   );
 };

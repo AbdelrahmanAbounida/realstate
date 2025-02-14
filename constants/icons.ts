@@ -39,6 +39,10 @@ import InfoSquare from "@/assets/icons/InfoSquare.png";
 import Users from "@/assets/icons/Users.png";
 import Logout from "@/assets/icons/Logout.png";
 import RightArrow from "@/assets/icons/RightArrow.png";
+import LeftArrow from "@/assets/icons/ArrowLeft.png";
+
+import Plus from "@/assets/icons/plus.png";
+import Minus from "@/assets/icons/minus.png";
 
 export default {
   HomeIcon,
@@ -77,7 +81,7 @@ export default {
   laundry,
   gps,
   PenIcon,
-
+  LeftArrow,
   // profile page
   Calender,
   Wallet,
@@ -89,4 +93,7 @@ export default {
   InfoSquare,
   RightArrow,
   Bell2,
+
+  Plus,
+  Minus,
 };
