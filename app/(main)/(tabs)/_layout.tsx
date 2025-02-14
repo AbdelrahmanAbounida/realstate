@@ -21,7 +21,7 @@ function TabBarIcon(props: {
   focused: boolean;
 }) {
   return (
-    <View className="flex-1 mt-3 flex flex-col items-center gap-1">
+    <View className="flex-1 mt-3 flex flex-col items-center gap-1 ">
       <Image
         className="size-6"
         source={props.icon}

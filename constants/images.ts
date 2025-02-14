@@ -1,4 +1,5 @@
 import ProfileImage from "@/assets/images/profile.png";
+import ProfileImageBig from "@/assets/images/profile2.png";
 import TokyoRecomm1 from "@/assets/images/tokyo-recom.png";
 import TokyoRecomm2 from "@/assets/images/tokyo-recom2.png";
 import TokyoRecomm3 from "@/assets/images/tokyo-recom3.png";
@@ -15,6 +16,7 @@ import Person1 from "@/assets/images/person1.png";
 
 export default {
   ProfileImage,
+  ProfileImageBig,
   TokyoRecomm1,
   TokyoRecomm2,
   TokyoRecomm3,
